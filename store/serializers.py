@@ -8,7 +8,8 @@ class CollectionSerializer(serializers.ModelSerializer):
         model = Collection
         fields = ['id', 'title', 'products_count']
 
-    products_count = serializers.IntegerField()
+    # This is set to read only, so that it won,t become a requirement for create collections
+    products_count = serializers.IntegerField(read_only=True)
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -37,9 +38,9 @@ class ProductSerializer(serializers.ModelSerializer):
     #     decimal_places=2,
     #     source='unit_price'
     # )
-    # # collection = serializers.PrimaryKeyRelatedField(queryset = Collection.objects.all())
-    # # collection = serializers.StringRelatedField()
-    # # collection = CollectionSerializer()
+    # collection = serializers.PrimaryKeyRelatedField(queryset = Collection.objects.all())
+    # collection = serializers.StringRelatedField()
+    # collection = CollectionSerializer()
     # collection = serializers.HyperlinkedRelatedField(
     #     queryset=Collection.objects.all(),
     #     view_name='collection-detail',
