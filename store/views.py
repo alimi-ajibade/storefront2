@@ -132,5 +132,12 @@ class CollectionDetail(RetrieveUpdateDestroyAPIView):
 
 
 class ReviewViewset(ModelViewSet):
-    queryset = Review.objects.all()
+    # queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        return Review.objects.filter(product_id=self.kwargs['product_pk'])
+
+    def get_serializer_context(self):
+        # We are reaching into the url to extracts our products id
+        return {'product_id': self.kwargs['product_pk']}
