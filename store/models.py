@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from uuid import uuid4
 
 
 class Promotion(models.Model):
@@ -97,13 +98,22 @@ class Address(models.Model):
 
 
 class Cart(models.Model):
+    # id is not automatically generated so that no one can easily mess with another person's cart
+    # Since you don't have to log in to creat a cart, an hacker can easily guess your id and mess your cart up
+    id = models.UUIDField(primary_key=True, default=uuid4)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey(
+        Cart, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField()
+
+    class Meta:
+        # This prevents the user from adding multiple products
+        # Instead the product's quantity will just be updated
+        unique_together = [['cart', 'product']]
 
 
 class Review(models.Model):
