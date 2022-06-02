@@ -11,7 +11,8 @@ class Promotion(models.Model):
 class Collection(models.Model):
     title = models.CharField(max_length=255)
     featured_product = models.ForeignKey(
-        'Product', on_delete=models.SET_NULL, null=True, related_name='+', blank=True)
+        'Product', on_delete=models.SET_NULL, null=True, related_name='+', blank=True
+    )
 
     def __str__(self) -> str:
         return self.title
@@ -94,7 +95,8 @@ class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     customer = models.ForeignKey(
-        Customer, on_delete=models.CASCADE)
+        Customer, on_delete=models.CASCADE
+    )
 
 
 class Cart(models.Model):
@@ -106,7 +108,8 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     cart = models.ForeignKey(
-        Cart, on_delete=models.CASCADE, related_name='items')
+        Cart, on_delete=models.CASCADE, related_name='items'
+    )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField()
 
@@ -118,7 +121,8 @@ class CartItem(models.Model):
 
 class Review(models.Model):
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name='reviews')
+        Product, on_delete=models.CASCADE, related_name='reviews'
+    )
     name = models.CharField(max_length=255)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
