@@ -111,7 +111,8 @@ class CartItem(models.Model):
         Cart, on_delete=models.CASCADE, related_name='items'
     )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField()
+    quantity = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1)])
 
     class Meta:
         # This prevents the user from adding multiple products
