@@ -2,7 +2,7 @@ from dataclasses import fields
 from itertools import product
 from logging import error
 from rest_framework import serializers
-from store.models import Cart, CartItem, Product, Collection, Review
+from store.models import Cart, CartItem, Customer, Product, Collection, Review
 from decimal import Decimal
 
 
@@ -127,3 +127,11 @@ class CollectionSerializer(serializers.ModelSerializer):
 
     # This is set to read only, so that it won,t become a requirement for create collections
     products_count = serializers.IntegerField(read_only=True)
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Customer
+        fields = ['id', 'user_id', 'phone', 'birth_date', 'membership']
