@@ -1,8 +1,7 @@
-from django.core.validators import MinValueValidator
-# This is done to decouple the core app from store app
-from django.conf import settings
-from django.db import models
 from django.contrib import admin
+from django.conf import settings
+from django.core.validators import MinValueValidator
+from django.db import models
 from uuid import uuid4
 
 
@@ -14,8 +13,7 @@ class Promotion(models.Model):
 class Collection(models.Model):
     title = models.CharField(max_length=255)
     featured_product = models.ForeignKey(
-        'Product', on_delete=models.SET_NULL, null=True, related_name='+', blank=True
-    )
+        'Product', on_delete=models.SET_NULL, null=True, related_name='+', blank=True)
 
     def __str__(self) -> str:
         return self.title
@@ -42,7 +40,7 @@ class Product(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['id']
+        ordering = ['title']
 
 
 class Customer(models.Model):
@@ -55,10 +53,6 @@ class Customer(models.Model):
         (MEMBERSHIP_SILVER, 'Silver'),
         (MEMBERSHIP_GOLD, 'Gold'),
     ]
-    # The already exist in the user model
-    # first_name = models.CharField(max_length=255)
-    # last_name = models.CharField(max_length=255)
-    # email = models.EmailField(unique=True)
     phone = models.CharField(max_length=255)
     birth_date = models.DateField(null=True, blank=True)
     membership = models.CharField(
@@ -66,7 +60,9 @@ class Customer(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    # Return values needed by list_display attribute in CustomerAdmin
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+
     @admin.display(ordering='user__first_name')
     def first_name(self):
         return self.user.first_name
@@ -75,12 +71,8 @@ class Customer(models.Model):
     def last_name(self):
         return self.user.last_name
 
-    def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
-
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
-        # Accessing custom permissions for the admin page
         permissions = [
             ('view_history', 'Can view history')
         ]
@@ -108,8 +100,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(
-        Order, on_delete=models.PROTECT, related_name='items')
+    order = models.ForeignKey(Order, on_delete=models.PROTECT, related_name='items')
     product = models.ForeignKey(
         Product, on_delete=models.PROTECT, related_name='orderitems')
     quantity = models.PositiveSmallIntegerField()
@@ -120,35 +111,29 @@ class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     customer = models.ForeignKey(
-        Customer, on_delete=models.CASCADE
-    )
+        Customer, on_delete=models.CASCADE)
 
 
 class Cart(models.Model):
-    # id is not automatically generated so that no one can easily mess with another person's cart
-    # Since you don't have to log in to creat a cart, an hacker can easily guess your id and mess your cart up
     id = models.UUIDField(primary_key=True, default=uuid4)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class CartItem(models.Model):
     cart = models.ForeignKey(
-        Cart, on_delete=models.CASCADE, related_name='items'
-    )
+        Cart, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1)])
+        validators=[MinValueValidator(1)]
+    )
 
     class Meta:
-        # This prevents the user from adding multiple products
-        # Instead the product's quantity will just be updated
         unique_together = [['cart', 'product']]
 
 
 class Review(models.Model):
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name='reviews'
-    )
+        Product, on_delete=models.CASCADE, related_name='reviews')
     name = models.CharField(max_length=255)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)

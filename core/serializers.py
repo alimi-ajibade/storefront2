@@ -1,4 +1,5 @@
-from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer, UserSerializer as BaseUserSerializer
+from store.models import Customer
+from djoser.serializers import UserSerializer as BaseUserSerializer, UserCreateSerializer as BaseUserCreateSerializer
 
 
 class UserCreateSerializer(BaseUserCreateSerializer):
@@ -9,4 +10,4 @@ class UserCreateSerializer(BaseUserCreateSerializer):
 
 class UserSerializer(BaseUserSerializer):
     class Meta(BaseUserSerializer.Meta):
-        fields = ['id', 'first_name', 'last_name', 'email', 'username']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']

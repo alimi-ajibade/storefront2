@@ -1,8 +1,5 @@
 from rest_framework import permissions
 
-# Allows only admin users to modify or create products
-# and all other user types to retrieve products
-
 
 class IsAdminOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -14,7 +11,6 @@ class IsAdminOrReadOnly(permissions.BasePermission):
 class FullDjangoModelPermissions(permissions.DjangoModelPermissions):
     def __init__(self) -> None:
         self.perms_map['GET'] = ['%(app_label)s.view_%(model_name)s']
-
 
 class ViewCustomerHistoryPermission(permissions.BasePermission):
     def has_permission(self, request, view):
