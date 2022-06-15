@@ -6,12 +6,15 @@ name = "pypi"
 [packages]
 django = "*"
 django-debug-toolbar = "*"
-mysqlclient = "*"
+mysqlclient = "==2.1.0"
 djangorestframework = "*"
 drf-nested-routers = "*"
 django-filter = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
+pillow = "*"
+django-cors-headers = "*"
+django-templated-mail = "*"
 
 [dev-packages]
 autopep8 = "*"
