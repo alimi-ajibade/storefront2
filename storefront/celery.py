@@ -1,0 +1,9 @@
+import os
+from celery import Celery
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'storefront.settings')
+
+celery = Celery('storefront')
+celery.config_from_object('django.conf:settings',
+                          namespace='CELERY')  # Read config from object
+celery.autodiscover_tasks()  # Auto discover tasks from the task module
