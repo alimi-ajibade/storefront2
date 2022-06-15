@@ -5,3 +5,4 @@ env
 .gitignore
 store/views1FuncBasedView.py
 token.txt
+/media/
