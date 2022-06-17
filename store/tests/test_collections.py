@@ -1,7 +1,7 @@
 import pytest
 from urllib import response
 from rest_framework import status
-from store.models import Collection
+from store.models import Collection, Product
 from model_bakery import baker
 
 
@@ -10,6 +10,13 @@ def create_collection(api_client):
     def do_create_collection(collection):
         return api_client.post('/store/collections/', collection)
     return do_create_collection
+
+
+@pytest.fixture
+def create_product(api_client):
+    def do_create_product(product):
+        return api_client.post('/store/products/', product)
+    return do_create_product
 
 
 @pytest.mark.django_db  # Gives our test access to the database
@@ -57,3 +64,10 @@ class TestRetrieveColleciton:
             'title': collection.title,
             'products_count': 0
         }
+
+    def test_if_collection_not_exits_returns_404(self, api_client):
+        collection_id = 0
+
+        response = api_client.get(f'/store/collections/{collection_id}/')
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
