@@ -7,7 +7,7 @@ class WebsiteUser(HttpUser):
 
     @task(2)
     def view_products(self):
-        collection_id = randint(2, 6)
+        collection_id = randint(3, 6)
         self.client.get(
             f'/store/products/?collection_id={collection_id}',
             name='/store/products')
@@ -30,10 +30,7 @@ class WebsiteUser(HttpUser):
 
     @task
     def say_hello(self):
-        self.client.get(
-            '/playground/hello/',
-            name='/playground/hello/'
-        )
+        self.client.get('/playground/hello/')
 
     def on_start(self):
         response = self.client.post('/store/carts/')
