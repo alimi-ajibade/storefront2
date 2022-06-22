@@ -6,3 +6,5 @@ env
 store/views1FuncBasedView.py
 token.txt
 /media/
+/static/
+general.log
