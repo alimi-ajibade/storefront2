@@ -1,10 +1,5 @@
-__pycache__/
 *.pyc
-Pipfile.lock
 env
-.gitignore
-store/views1FuncBasedView.py
-token.txt
 /media/
 /static/
 general.log
