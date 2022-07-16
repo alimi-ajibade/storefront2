@@ -1,4 +1,4 @@
-# Building a RESTFUL API FOR STOREFRONT
+# Building a RESTFUL API FOR ONLINE STORE
 
 ## Endpoints
 1. Product List
