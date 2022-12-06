@@ -75,49 +75,51 @@ project.It uses a token based authentication system and supports guest checkout.
    
    Sample Response
     
-   ```json
-        {
-            "id": 648,
-            "title": "7up Diet, 355 Ml",
-            "description": "tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est",
-            "slug": "-",
-            "inventory": 82,
-            "unit_price": 79.07,
-            "price_with_tax": 86.977,
-            "collection": 5,
-            "images": []
-        }
+    ```json
+    {
+          "id": 648,
+          "title": "7up Diet, 355 Ml",
+          "description": "tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est",
+          "slug": "-",
+          "inventory": 82,
+          "unit_price": 79.07,
+          "price_with_tax": 86.977,
+          "collection": 5,
+          "images": []
+       }
     ```
-    
-### Collection 
+   
+   ### Collection Endpoint
+   
    Send a GET request `/store/collections` to get all collections.
    
    Sample Response
-   ```json
-    [
-    {
-        "id": 1,
-        "title": "Flowers",
-        "products_count": 0
-    },
-    {
-        "id": 2,
-        "title": "Grocery",
-        "products_count": 0
-    },
-    {
-        "id": 3,
-        "title": "Beauty",
-        "products_count": 254
-    }
-   ]
-   ```
+    
+    ```json
+      [
+      {
+          "id": 1,
+          "title": "Flowers",
+          "products_count": 0
+      },
+      {
+          "id": 2,
+          "title": "Grocery",
+          "products_count": 0
+      },
+      {
+          "id": 3,
+          "title": "Beauty",
+          "products_count": 254
+      }
+     ]
+    ```
  
  ### Cart Endpoint
    Send a POST request `/store/carts` to create a cart.
    
    **Sample Response**
-   ```
+   ```json
    {
     "id": "1f6942a1-b3f4-4a61-ad24-ed41790e88e5",
     "items": [],
