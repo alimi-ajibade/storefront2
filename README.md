@@ -4,9 +4,12 @@ project.It uses a token based authentication system and supports guest checkout.
 
 ## Endpoints
 ### Product List
-  `/store/products` to get all product list
+  `/store/products` to get all product list.
+  
   Sample Response
-  `[
+  
+  ```json
+  [
         {
             "id": 648,
             "title": "7up Diet, 355 Ml",
@@ -29,7 +32,8 @@ project.It uses a token based authentication system and supports guest checkout.
             "collection": 4,
             "images": []
         }
-   ]`
+   ]```
+   
 2. Product detials
 3. Collection List
 4. Collection Details
