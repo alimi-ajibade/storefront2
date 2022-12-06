@@ -74,7 +74,8 @@ project.It uses a token based authentication system and supports guest checkout.
    Send a GET request to `/store/products/id` to get a particular product.
    
    Sample Response
-    ```json
+    
+   ```json
         {
             "id": 648,
             "title": "7up Diet, 355 Ml",
