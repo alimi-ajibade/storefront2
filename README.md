@@ -1,4 +1,6 @@
-# Building a RESTFUL API FOR ONLINE STORE
+# STOREFRONT
+Store Front is an online store backend that can be easily combined with any frontend
+project.It uses a token based authentication system and supports guest checkout.
 
 ## Endpoints
 1. Product List
