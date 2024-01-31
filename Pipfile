@@ -23,6 +23,8 @@ whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
 django-silk = "*"
+python-dotenv = "*"
+drf-yasg = "*"
 
 [dev-packages]
 autopep8 = "*"
@@ -34,4 +36,4 @@ locust = "*"
 django-silk = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"

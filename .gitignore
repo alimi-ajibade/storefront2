@@ -3,3 +3,5 @@ env
 /media/
 /static/
 general.log
+.env
+Pipfile.lock
